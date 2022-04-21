@@ -11,7 +11,7 @@ This Project aims to apply remote guidance using Augmented Reality between the b
 
 ## Dependencies
 
-### [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html):
+>### [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html):
 Allows real-time, peer-to-peer, media exchange between two devices. A connection is established through a discovery and negotiation process called signaling. The signaling between two peers is not supported by WebRTC protocol because every peer is connecting to the Internet behind a [NAT](https://en.wikipedia.org/wiki/Network_address_translation) so each peer has no information about his public IP address. The solution for this is to use a signaling server.
 
 #### Signaling Server: 
@@ -36,3 +36,12 @@ Once the two peers set their `LocalDescription` and `RemoteDescription` They can
 ##### Remarks:
 1. The `MediaStream` object should be added using the `AddTrack` method before sending an Offer/Answer to the other peer. Adding a track should be followed by new Offer/Answer in order for the other peer to have an updated SDP.
 2. The `IceCandidate` should be handled on the remote peer after the `RemoteDescritption` is set. 
+
+
+
+>### [RenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html)
+Unity Render streaming is based on the WebRTC protocol. It allows streaming real-time data on a peer to peer connection using WebRTC. This package also allows sending input data from the browser to Unity.
+
+#### Streaming ARFoundation Camera:
+To stream the arCamera to the browser this project used `RenderStreaming` and `Broadcast` scripts.
+`RenderStreaming`: is the base class for the Unity RenderStreaming package. It is responsible for creating a connection to the Web server. It allows two types of communication to the server. In our project we used the WebSocket signaling.
