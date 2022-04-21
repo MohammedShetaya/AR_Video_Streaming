@@ -1,8 +1,10 @@
 # AR_Video_Streaming
 
 ## Table of Content:
- - [Overview](#overview)
- - [Dependencies](#dependencies)
+ * [Overview](#overview)
+ * [Dependencies](#dependencies)
+   * [WebRTC](#webrtc)
+   * [Render Streaming](#renderstreaming)
 
 ## Overview
 
