@@ -68,3 +68,6 @@ This script extends from Unity.RenderStreaming.VideoStreamSender class. It is re
 
 #### `CameraTextureMixer`: 
 This script is responsible for creating a copy from the Rendered image from the camera and print this image to a `RenderTexture` which will be used in the `ARCameraSender` script.
+
+#### `WSClient`
+This script is sample script that holds all the logic for sending and receiving a messages between the Unity client and the Web Server.
