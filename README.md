@@ -5,6 +5,8 @@
  * [Dependencies](#dependencies)
    * [WebRTC](#webrtc)
    * [Render Streaming](#renderstreaming)
+* [Streaming ARFoundation Camera to browser](#ar-camera-streaming)
+* [Sending Web browser Input to Unity](#sending-web-browser-input-to-unity)
 
 ## Overview
 
@@ -33,11 +35,12 @@ The signaling server acts as an interface between the Unity Android application 
 ![Signaling Process Browser API](./webrtc_signaling_diagram.svg) 
 
 #### Peer Connection:
-Once the two peers set their `LocalDescription` and `RemoteDescription` They can start exchaning rela-time data (Video, Audio, etc..). A `MediaStream` object can be sent over the `RTCPeerConnection` using the `AddTrack` method.
+Once the two peers set their `LocalDescription` and `RemoteDescription` They can start exchaning real-time data (Video, Audio, etc..). A `MediaStream` object can be sent over the `RTCPeerConnection` using the `AddTrack` method. The other peer can register to the `OnTrack` event which is will be called once a track is received.
 
 ##### Remarks:
 1. The `MediaStream` object should be added using the `AddTrack` method before sending an Offer/Answer to the other peer. Adding a track should be followed by new Offer/Answer in order for the other peer to have an updated SDP.
-2. The `IceCandidate` should be handled on the remote peer after the `RemoteDescritption` is set. 
+2. The `IceCandidate` should be handled on the remote peer after the `RemoteDescritption` is set.
+3. The sending peer needs to register to `OnNegotiationNeeded` event which is called once `AddTrack` finishes execution. The handler of this event should send a new Offer to the remote peer with the new SDP. 
 
 &nbsp;
 &nbsp;
@@ -49,3 +52,6 @@ Unity Render streaming is based on the WebRTC protocol. It allows streaming real
 #### Streaming ARFoundation Camera:
 To stream the arCamera to the browser this project used `RenderStreaming` and `Broadcast` scripts.
 `RenderStreaming`: is the base class for the Unity RenderStreaming package. It is responsible for creating a connection to the Web server. It allows two types of communication to the server. In our project we used the WebSocket signaling.
+
+## AR Camera Streaming 
+
