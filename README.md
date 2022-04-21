@@ -34,4 +34,5 @@ The signaling server acts as an interface between the Unity Android application 
 Once the two peers set their `LocalDescription` and `RemoteDescription` They can start exchaning rela-time data (Video, Audio, etc..). A `MediaStream` object can be sent over the `RTCPeerConnection` using the `AddTrack` method.
 
 ##### Remarks:
-. The `MediaStream` object should be added using the `AddTrack` method before sending an Offer/Answer to the other peer. Adding a track should be followed by new Offer/Answer in order for the other peer to have an updated SDP.
+1. The `MediaStream` object should be added using the `AddTrack` method before sending an Offer/Answer to the other peer. Adding a track should be followed by new Offer/Answer in order for the other peer to have an updated SDP.
+2. The `IceCandidate` should be handled on the remote peer after the `RemoteDescritption` is set. 
