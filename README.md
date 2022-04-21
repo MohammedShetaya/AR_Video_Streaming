@@ -64,10 +64,10 @@ This is the base class for the Unity render streaming package. It is responsible
 This script is responsible for handling the singlaing messages.
 
 #### `ARCameraSender`: 
-This script extends from Unity.RenderStreaming.VideoStreamSender class. It is responsible for sending the video stream as a `RenderTexture`.
+This script extends from Unity.RenderStreaming.VideoStreamSender class. It is responsible for sending the video stream as a `RenderTexture`. This script should be attached to the arCamera object.
 
 #### `CameraTextureMixer`: 
-This script is responsible for creating a copy from the Rendered image from the camera and print this image to a `RenderTexture` which will be used in the `ARCameraSender` script.
+This script is responsible for creating a copy from the Rendered image from the camera and print this image to a `RenderTexture` which will be used in the `ARCameraSender` script.This script should be attached to the arCamera object.
 
 #### `WSClient`
 This script is sample script that holds all the logic for sending and receiving a messages between the Unity client and the Web Server.
