@@ -39,8 +39,8 @@ Once the two peers set their `LocalDescription` and `RemoteDescription` They can
 1. The `MediaStream` object should be added using the `AddTrack` method before sending an Offer/Answer to the other peer. Adding a track should be followed by new Offer/Answer in order for the other peer to have an updated SDP.
 2. The `IceCandidate` should be handled on the remote peer after the `RemoteDescritption` is set. 
 
-## 
-##
+&nbsp;
+&nbsp;
 
 >### [RenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html)
 Unity Render streaming is based on the WebRTC protocol. It allows streaming real-time data on a peer to peer connection using WebRTC. This package also allows sending input data from the browser to Unity.
