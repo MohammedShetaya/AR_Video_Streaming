@@ -49,7 +49,7 @@ Once the two peers set their `LocalDescription` and `RemoteDescription` They can
 &nbsp;
 
 ### [RenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html)
-Unity Render streaming is based on the WebRTC protocol. It allows streaming real-time data on a peer to peer connection using WebRTC. This package also allows sending input data from the browser to Unity.
+Unity Render streaming is based on the WebRTC protocol. It allows streaming real-time data on a peer to peer connection using WebRTC. This package also allows sending input data from the browser to Unity. It supports Windows and Android applications.
 
 &nbsp;
 &nbsp;
@@ -71,3 +71,8 @@ This script is responsible for creating a copy from the Rendered image from the 
 
 #### `WSClient`
 This script is sample script that holds all the logic for sending and receiving a messages between the Unity client and the Web Server.
+
+&nbsp;
+&nbsp;
+
+>## Sending Web browser Input To Unity:
