@@ -14,18 +14,21 @@ This Project aims to apply remote guidance using Augmented Reality between the b
 ### [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html):
 Allows real-time, peer-to-peer, media exchange between two devices. A connection is established through a discovery and negotiation process called signaling. The signaling between two peers is not supported by WebRTC protocol because every peer is connecting to the Internet behind a [NAT](https://en.wikipedia.org/wiki/Network_address_translation) so each peer has no information about his public IP address. The solution for this is to use a signaling server.
 
->#### Signaling
+#### Signaling Server: 
 The signaling server acts as an interface between the Unity Android application and the browser clients so they can Start sending signaling messages to each other. Using an HTTP server in this case would not help in the case of WebRTC, so it is optimal to use a WebSocket server. WebSocket connection is statefull (FullDuplex) unlike the HTTP connection where the server can not send responses to the client unless the client sends a request. Websocket servers can send and receive requests at any moment in the connection lifetime. In the case of WebRTC, the server will never know when a client will send a signaling message so it can be forwarded to the other client.
 
-#### The singnaling process:
+#### Singnaling Process:
 1. The browser client sends and Offer message to the websocket server
 2. The Signaling server receives the message from the broswer and forwards it to the Unity client
 3. The Unity client receives the offer and set this Offer as its RemoteDescription
 4. The Unity client create an Answer and set this Answer as its LocalDescription
 5. The Unity client sends the Answer to the browser client
-6. The Signaling server receives the message from the broswer and forwards it to the Unity client
-7. The browser client receives the Answer and set this Answer as its RemoteDescription
-8. The Two clients register to the `onIceCandidate` event and once the event handler is called, it should send the collected iceCandidate to the other Peer.
-9. Once the other Peer receives an iceCandidate, it should call `AddIceCanidate` in order to set the [SDP](https://en.wikipedia.org/wiki/Session_Description_Protocol).
+7. The Signaling server receives the message from the broswer and forwards it to the Unity client
+8. The browser client receives the Answer and set this Answer as its RemoteDescription
+9. The Two clients register to the `onIceCandidate` event and once the event handler is called, it should send the collected iceCandidate to the other Peer.
+10. Once the other Peer receives an iceCandidate, it should call `AddIceCanidate` in order to set the [SDP](https://en.wikipedia.org/wiki/Session_Description_Protocol).
 
 ![Signaling Process Browser API](./webrtc_signaling_diagram.svg) 
+
+#### Peer Connection:
+Once the two peers set their `localDescription` and `remoteDescription` They can start exchaning rela-time data (Video, Audio, etc..). A `MediaStream` object can be sent over the `RTCPeerConnection` using the `addTrack` method.
