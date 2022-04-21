@@ -24,6 +24,7 @@ The signaling server acts as an interface between the Unity Android application 
 5. The Unity client sends the Answer to the browser client
 6. The Signaling server receives the message from the broswer and forwards it to the Unity client
 7. The browser client receives the Answer and set this Answer as its RemoteDescription
-8. The Two clients register to the `onIceCandidate` event and once the event handler is called, it should send the collected iceCandidate to the other Peer. 
+8. The Two clients register to the `onIceCandidate` event and once the event handler is called, it should send the collected iceCandidate to the other Peer.
+9. Oce the other Peer receives an iceCandidate, it should call `AddIceCanidate` in order to set the [SDP](https://en.wikipedia.org/wiki/Session_Description_Protocol).
 
 ![Signaling Process Browser API](./webrtc_signaling_diagram.svg) 
