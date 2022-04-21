@@ -7,6 +7,8 @@
    * [Render Streaming](#renderstreaming)
 * [Streaming ARFoundation Camera to browser](#ar-camera-streaming)
 * [Sending Web browser Input to Unity](#sending-web-browser-input-to-unity)
+* [Applying RayCasting in Unity](#RayCasting)
+* [Browser Client](#browser-client)
 
 >## Overview
 
@@ -53,3 +55,12 @@ Unity Render streaming is based on the WebRTC protocol. It allows streaming real
 &nbsp;
 
 >## AR Camera Streaming 
+
+Render Streaming is used to stream the camera to arCamer to the browser. In order to do this the following scripts were used:
+#### `RenderStreaming`: This is the base class for the Unity render streaming package. It is responsible for connecting to the browser. It supports two types of Signaling (HTTP/WebSocket). In this project the Websocket signaling were used.
+
+#### `Broadcast`: This script is responsible for handling the singlaing messages.
+
+#### `ARCameraSender`: This script extends from Unity.RenderStreaming.VideoStreamSender class. It is responsible for sending the video stream as a `RenderTexture`.
+
+#### `CameraTextureMixer`: This script is responsible for creating a copy from the Rendered image from the camera and print this image to a `RenderTexture` which will be used in the `ARCameraSender` script.
