@@ -13,9 +13,7 @@ namespace Unity.RenderStreaming
         /// <summary>
         /// 
         /// </summary>
-        [SerializeField]
-        RenderTexture rt;
-
+  
 
         [SerializeField, RenderTextureDepthBuffer]
         private int depth = 0;
@@ -40,7 +38,9 @@ namespace Unity.RenderStreaming
 
         protected override MediaStreamTrack CreateTrack()
         {
-            /*if (m_camera.targetTexture != null)
+            RenderTexture rt;
+
+            if (m_camera.targetTexture != null)
             {
                 Debug.Log("created new render texture else");
                 rt = m_camera.targetTexture;
@@ -71,7 +71,7 @@ namespace Unity.RenderStreaming
                 rt.Create();
                 m_camera.targetTexture = rt;
             }
-            */
+            
             return new VideoStreamTrack(rt);
         }
     }
