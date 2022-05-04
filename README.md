@@ -13,16 +13,30 @@
 
 >## Overview
 
-This Project aims to apply remote guidance using Augmented Reality between the browser and the android phone. The android application streams an [ARFoundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/manual/index.html) scene to the browser, then the browser can annotate that stream with AR features. The project is based on the  [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html) And [UnityRenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html) packages.
+This Project aims to apply remote guidance using Augmented Reality annotation between the web browser and an android phone. The android application streams an [ARFoundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/manual/index.html) scene to the browser which is responsible for plane detection, then the browser can annotate that stream with AR objects e.g. Arrows. 
 
+
+&nbsp;
+&nbsp;
+
+>## Installation and setup
+
+
+
+&nbsp;
+&nbsp;
 
 >## Dependencies
+The project is based on:
+- [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html) protocol for the browser and unity (version `2.4.0-exp.6`). 
+- [UnityRenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html) package (version `3.1.0-exp.3`).
+
 
 ### [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html):
-Allows real-time, peer-to-peer, media exchange between two devices. A connection is established through a discovery and negotiation process called signaling. The signaling between two peers is not supported by WebRTC protocol because every peer is connecting to the Internet behind a [NAT](https://en.wikipedia.org/wiki/Network_address_translation) so each peer has no information about his public IP address. The solution for this is to use a signaling server.
+This package is an API for WebRTC protocol, but in unity with the same browser implementation which gives a great benifit in using this protocol in unity AR and VR applications. This package is compitble with the browser API so it can be used to allow real-time, peer-to-peer, media exchange between unity-unity application or unity-browser application. A connection is established through a discovery and negotiation process called signaling. The signaling between two peers is not supported by WebRTC protocol because every peer is connecting to the Internet behind a [NAT](https://en.wikipedia.org/wiki/Network_address_translation) so each peer has no information about his public IP address therefore each peer cannot give his IP to the other peer. The solution for this is to use a signaling server. 
 
 #### Signaling Server: 
-The signaling server acts as an interface between the Unity Android application and the browser clients so they can Start sending signaling messages to each other. Using an HTTP server in this case would not help in the case of WebRTC, so it is optimal to use a WebSocket server. WebSocket connection is statefull (FullDuplex) unlike the HTTP connection where the server can not send responses to the client unless the client sends a request. Websocket servers can send and receive requests at any moment in the connection lifetime. In the case of WebRTC, the server will never know when a client will send a signaling message so it can be forwarded to the other client.
+The signaling server acts as an interface between the Unity Android application and the browser clients so they can Start sending signaling messages to each other. Using an HTTP server in this case would not help in the case of WebRTC as the signaling messages are being generated asyncrounosly, so it is optimal to use a WebSocket server. WebSocket connection is statefull (FullDuplex) connection. Unlike the HTTP connection where the server cannot send responses to the client unless the client sends a request. Websocket servers can send and receive requests at any moment in the connection lifetime. In the case of WebRTC, the server will never know when a client will send a signaling message so it can be forwarded to the other client.
 
 #### Singnaling Process:
 1. The browser client sends and Offer message to the websocket server
@@ -37,7 +51,7 @@ The signaling server acts as an interface between the Unity Android application 
 
 ![Signaling Process Browser API](./webrtc_signaling_diagram.svg) 
 
-#### Peer Connection:
+#### P2P Connection:
 Once the two peers set their `LocalDescription` and `RemoteDescription` They can start exchaning real-time data (Video, Audio, etc..). A `MediaStream` object can be sent over the `RTCPeerConnection` using the `AddTrack` method. The other peer can register to the `OnTrack` event which is will be called once a track is received.
 
 ##### Remarks:
@@ -45,7 +59,6 @@ Once the two peers set their `LocalDescription` and `RemoteDescription` They can
 2. The `IceCandidate` should be handled on the remote peer after the `RemoteDescritption` is set.
 3. The sending peer needs to register to `OnNegotiationNeeded` event which is called once `AddTrack` finishes execution. The handler of this event should send a new Offer to the remote peer with the new SDP. 
 
-&nbsp;
 &nbsp;
 &nbsp;
 
