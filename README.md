@@ -2,6 +2,7 @@
 
 ## Table of Content:
  * [Overview](#overview)
+ * [Installation](#installation)
  * [Dependencies](#dependencies)
    * [WebRTC](#webrtc)
    * [Render Streaming](#renderstreaming)
@@ -19,9 +20,31 @@ This Project aims to apply remote guidance using Augmented Reality annotation be
 &nbsp;
 &nbsp;
 
->## Installation and setup
+>## Installation
+#### Building the Unity application:
+1. Clone this repository `https://github.com/MohammedShetaya/AR_Video_Streaming.git`
+2. Open project from disk using Unity Hub
+3. After the project is open, check if the Build setting is using Android platform
+4. On the player settings, check if the Auto graphics API is checked, buIld the project for ARM64, and Android version is 7.0 or above.
+5. On the mobile phone, Allow developer mode, then allow USB debugging and Connect the device to the labtop.
+6. On Build settings, click build and run.
 
+#### Setting up the Web application:
+1. Navigate to the project directory using powershell, then `cd WebApp`, then run the command `npm run dev -- -w`
+2. the console will show a link to the local web application
 
+#### Using the Application:
+There are two modes, the first one is receiving a video steam from unity and showing this stream on the browser. To us this mode:
+1. Open the application on mobile and allow access to the camera.
+2. Then go back to the local web app on the browser and click receiver sample.
+3. Click on play video button, then the stream should be started.
+ 
+The second mode is video receiver with AR annotation:
+1. Open the application on mobile and allow access to the camera.
+2. Then go back to the local web app on the browser and click video player.
+3. Click on play video button, then the stream should be started.
+4. By now the mobile application should have started detecting the planes and the video stream is sent to the browser.
+5. Click on any of the detected planes on the browser, then an arrow should point to the click position on both clients.
 
 &nbsp;
 &nbsp;
