@@ -34,7 +34,7 @@ This Project aims to apply remote guidance using Augmented Reality annotation on
 2. the console will show a link to the local web application
 
 #### Using the Application:
-There are two modes, the first one is receiving a video steam from unity and showing this stream on the browser. To us this mode:
+There are two modes, the first one is receiving a video steam from unity and showing this stream on the browser:
 1. Open the application on mobile and allow access to the camera.
 2. Then go back to the local web app on the browser and click receiver sample.
 3. Click on play video button, then the stream should be started.
@@ -59,7 +59,7 @@ The project is based on:
 This package is an API for WebRTC protocol, but in unity with the same browser implementation which gives a great benifit in using this protocol in unity AR and VR applications. This package is compitble with the browser API so it can be used to allow real-time, peer-to-peer, media exchange between unity-unity application or unity-browser application. A connection is established through a discovery and negotiation process called signaling. The signaling between two peers is not supported by WebRTC protocol because every peer is connecting to the Internet behind a [NAT](https://en.wikipedia.org/wiki/Network_address_translation) so each peer has no information about his public IP address therefore each peer cannot give his IP to the other peer. The solution for this is to use a signaling server. 
 
 #### Signaling Server: 
-The signaling server acts as an interface between the Unity Android application and the browser clients so they can Start sending signaling messages to each other. Using an HTTP server in this case would not help in the case of WebRTC as the signaling messages are being generated asyncrounosly, so it is optimal to use a WebSocket server. WebSocket connection is statefull (FullDuplex) connection. Unlike the HTTP connection where the server cannot send responses to the client unless the client sends a request. Websocket servers can send and receive requests at any moment in the connection lifetime. In the case of WebRTC, the server will never know when a client will send a signaling message so it can be forwarded to the other client.
+The signaling server acts as an interface between the Unity Android application and the browser clients so they can Start sending signaling messages to each other. Using an HTTP server would not help in the case of WebRTC as the signaling messages are being generated asyncrounosly, so it is optimal to use a WebSocket server. WebSocket connection is statefull (FullDuplex) connection. Unlike the HTTP connection where the server cannot send responses to the client unless the client sends a request. Websocket servers can send and receive requests at any moment in the connection lifetime. In the case of WebRTC, the server will never know when a client will send a signaling message so it can be forwarded to the other client.
 
 #### Singnaling Process:
 1. The browser client sends and Offer message to the websocket server
@@ -86,28 +86,31 @@ Once the two peers set their `LocalDescription` and `RemoteDescription` They can
 &nbsp;
 
 ### [RenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html)
-Unity Render streaming is based on the WebRTC protocol. It allows streaming real-time data on a peer to peer connection using WebRTC. This package also allows sending input data from the browser to Unity. It supports Windows and Android applications.
+Unity Render streaming is based on the WebRTC protocol. It provides a high level implementation for the sinaling, sending, and receiving process. It allows streaming real-time data on a peer to peer connection using WebRTC. This package also allows sending input data from the browser to Unity by maping the browser Events to Unity Actions. With this package, it is possible to build streaming applications in Unity for both Windows and Andriod.
 
 &nbsp;
 &nbsp;
 
 >## AR Camera Streaming 
+In order to stream the Unity camera. The following components must be added to the scene:
+1. ARSession Origin: This is an origin to the scene when the player start the application. It is responisble for managing all the Trackables that will be added on the run e.g. 3D cubes.
+2. AR Session: Controls the lifecycle and configuration options for an AR session
 
-Render Streaming is used to stream the camera to arCamer to the browser. In order to do this the following scripts were used:
-#### `RenderStreaming`: 
-This is the base class for the Unity render streaming package. It is responsible for connecting to the browser. It supports two types of Signaling (HTTP/WebSocket). In this project the Websocket signaling were used.
+The following scripts are added to the arCamera component which is a subComponent of the ARSession origin component:
+#### Rendertreaming: 
+This is the base class for the Unity render streaming package. It is responsible for connecting to the signaling server and streaming the provided real-time data. It supports two types of Signaling (HTTP/WebSocket). In this project the Websocket signaling were used as dicussed in the WebRTC part above. This script is expecting inputs of type `SignalingHandlerBase` which is a parent class for the `BroadCast` class used in this project.
 
-#### `Broadcast`: 
-This script is responsible for handling the singlaing messages.
+#### Broadcast: 
+This script is responsible for handling the singlaing messages (offer, answer, ice-candidate) and Sending the input streams to be used in `RenderStreaming` script. This class is expecting inputs of type `StreamSenderBase` which is the parent class for the ARCameraSender used in this project.
 
-#### `ARCameraSender`: 
-This script extends from Unity.RenderStreaming.VideoStreamSender class. It is responsible for sending the video stream as a `RenderTexture`. This script should be attached to the arCamera object.
+#### ARCameraSender: 
+This script extends from Unity.RenderStreaming.VideoStreamSender class. It is responsible for sending the video stream as a RenderTexture. This script changes the TargetTexture of the camera to be a RenderTexture instead of rendering to the screen. It should be attached to the arCamera object.
 
-#### `CameraTextureMixer`: 
-This script is responsible for creating a copy from the Rendered image from the camera and print this image to a `RenderTexture` which will be used in the `ARCameraSender` script.This script should be attached to the arCamera object.
+#### CameraTextureMixer : 
+This script is responsible for creating a copy from the Rendered image from the camera and print this image to a `RenderTexture` which will be used in the ARCameraSender script. This script should be attached to the arCamera object and should be used only if no other arCamera is used for screen rendering.
 
-#### `WSClient`
-This script is sample script that holds all the logic for sending and receiving a messages between the Unity client and the Web Server.
+#### WSClient (not used)
+This script is sample script that holds all the logic for sending and receiving a messages between the Unity client and the Web Server and it was used in the project early stages only.
 
 &nbsp;
 &nbsp;
