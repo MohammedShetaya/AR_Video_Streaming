@@ -120,6 +120,8 @@ In this project the only browser input that is used is the mouse click, although
 
 `WepApp/client/public/js/register-events.js`: in this file there are functions for event handling. The only used function is `registerMouseEvents` which is responsible for sending click events to untiy through a prviously created `RTCDataChannel`. Then function is being called in `WepApp/client/public/videoPlayer.js` file on the creation of the video element.
 
+![Target Click coordinates](./TargetClick.png) 
+
 
 &nbsp;
 &nbsp;
