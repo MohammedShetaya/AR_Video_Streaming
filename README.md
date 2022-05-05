@@ -137,15 +137,19 @@ The implementation of the coordinate calculation on the browser client side can 
 
 #### Sending through RTCDataChannel:
 Once the coordinates are calculated they will be sent to unity through an `RTCDataChannel` defined in the file `Peer.js`. The channel can send buffer arrays, so it is better for sending both x & y coordinates in one chunck of data instead of sending each one on a different message. The following code is responsible for sending the coordinates 
+ 
+
 ``` let data = new DataView(new ArrayBuffer(8),0);
 
     data.setFloat32(0,x,true);
     data.setFloat32(4,y,true);
+ 
+    _videoPlayer && _videoPlayer.sendMsg(data.buffer);
+```
 
-    console.log(data.getFloat32(0));
-    console.log(data.getFloat32(4));
+#### Receiving the coordinates in unity:
+First, the `BrowserInput` script must be added to the camera that holds the `RenderStreaming` and `BroadCast` scripts. `BrowserInput` is inherited from the render streaming class `InputChannelReceiverBase` and contains an implementation for the setChannel function that is called once an RTCDataChannel is created by the RenderStreaming Object. Now, it is possible to register to `onMessage` Action of the data channel. Once a message is received with the coordinated then it can be passed to the `RayCasting` object by calling `shootArrow` method.
 
-    _videoPlayer && _videoPlayer.sendMsg(data.buffer);```
 
 &nbsp;
 &nbsp;
