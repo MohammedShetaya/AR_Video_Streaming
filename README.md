@@ -118,10 +118,21 @@ This script is sample script that holds all the logic for sending and receiving 
 >## Sending Web browser Input To Unity:
 In this project the only browser input that is used is the mouse click, although it can be extendend to any browser event. Once the video is received from unity and is shown on the browser video element, the user can start clicking on any place on that video element. The click coordinates is sent to unity as a buffer array of bytes. The following files are used in this part: 
 
-> Calculating the coordinates:
-In the figure, the red point represents the place where the browser client clicks. The browser events will call the onCkick event handler of the video element with the coordindates attached to the mouseEvent. These coordinates are not the projected unity coordinates where the rendered image was projected in the first place. 
+#### Calculating the coordinates:
+In the figure, the red point represents the place where the browser client clicks. The browser events will call the onCkick event handler of the video element and attach the coordindates to the mouseEvent. These coordinates are not the projected unity coordinates where the rendered image was projected in the first place, So we needed to calculate the x,y portions colored in blue. `xPortion = X - X'` and `yPortion = Y - Y'`, then we needed to divide by the video scale. Where the video scale is ratio between the original video size and the size displayed on the screen. To calculate the video scale first we need to decide if the video is in lanscape or portrait mode and this is done by checking if `W/H` is greater than `orignalVideo.width/originalVideo.height`. If the video is in landscape mode then `Video Scale = browser video element with / original video with` else it will be `Video Scale = browser video elemnt height / original video element height`. The coordinates in Unity 2d World will be:
 
-![Target Click coordinates](./TargetClickCoordinates.png) 
+<p align="center">
+  `X = xPortion / Scale`
+</p>
+
+<p align="center">
+  `Y = original video height - yPortion / Scale`
+</p>
+
+
+#### Sending through RTCDataChannel:
+![Target Click coordinates](./TargetClickCoordinates.png)
+
 `WepApp/client/public/js/register-events.js`: in this file there are functions for event handling. The only used function is `registerMouseEvents` which is responsible for sending click events to untiy through a prviously created `RTCDataChannel`. Then function is being called in `WepApp/client/public/videoPlayer.js` file on the creation of the video element.
 
 
