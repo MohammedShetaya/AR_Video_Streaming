@@ -118,9 +118,11 @@ This script is sample script that holds all the logic for sending and receiving 
 >## Sending Web browser Input To Unity:
 In this project the only browser input that is used is the mouse click, although it can be extendend to any browser event. Once the video is received from unity and is shown on the browser video element, the user can start clicking on any place on that video element. The click coordinates is sent to unity as a buffer array of bytes. The following files are used in this part: 
 
-`WepApp/client/public/js/register-events.js`: in this file there are functions for event handling. The only used function is `registerMouseEvents` which is responsible for sending click events to untiy through a prviously created `RTCDataChannel`. Then function is being called in `WepApp/client/public/videoPlayer.js` file on the creation of the video element.
+> Calculating the coordinates:
+In the figure, the red point represents the place where the browser client clicks. The browser events will call the onCkick event handler of the video element with the coordindates attached to the mouseEvent. These coordinates are not the projected unity coordinates where the rendered image was projected in the first place. 
 
-![Target Click coordinates](./TargetClick.png) 
+![Target Click coordinates](./TargetClickCoordinates.png) 
+`WepApp/client/public/js/register-events.js`: in this file there are functions for event handling. The only used function is `registerMouseEvents` which is responsible for sending click events to untiy through a prviously created `RTCDataChannel`. Then function is being called in `WepApp/client/public/videoPlayer.js` file on the creation of the video element.
 
 
 &nbsp;
