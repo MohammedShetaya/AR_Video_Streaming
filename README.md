@@ -122,19 +122,30 @@ In this project the only browser input that is used is the mouse click, although
 In the figure, the red point represents the place where the browser client clicks. The browser events will call the onCkick event handler of the video element and attach the coordindates to the mouseEvent. These coordinates are not the projected unity coordinates where the rendered image was projected in the first place, So we needed to calculate the x,y portions colored in blue. `xPortion = X - X'` and `yPortion = Y - Y'`, then we needed to divide by the video scale. Where the video scale is ratio between the original video size and the size displayed on the screen. To calculate the video scale first we need to decide if the video is in lanscape or portrait mode and this is done by checking if `W/H` is greater than `orignalVideo.width/originalVideo.height`. If the video is in landscape mode then `Video Scale = browser video element with / original video with` else it will be `Video Scale = browser video elemnt height / original video element height`. The coordinates in Unity 2d World will be:
 
 <p align="center">
-  `X = xPortion / Scale`
+  X = xPortion / Scale
 </p>
 
 <p align="center">
-  `Y = original video height - yPortion / Scale`
+  Y = original video height - yPortion / Scale
 </p>
 
+The implementation of the coordinate calculation on the browser client side can be found in the files:
+1. `WepApp/client/public/js/register-events.js`
+2. `registerMouseEvents`
 
-#### Sending through RTCDataChannel:
 ![Target Click coordinates](./TargetClickCoordinates.png)
 
-`WepApp/client/public/js/register-events.js`: in this file there are functions for event handling. The only used function is `registerMouseEvents` which is responsible for sending click events to untiy through a prviously created `RTCDataChannel`. Then function is being called in `WepApp/client/public/videoPlayer.js` file on the creation of the video element.
+#### Sending through RTCDataChannel:
+Once the coordinates are calculated they will be sent to unity through an `RTCDataChannel` defined in the file `Peer.js`. The channel can send buffer arrays, so it is better for sending both x & y coordinates in one chunck of data instead of sending each one on a different message. The following code is responsible for sending the coordinates 
+``` let data = new DataView(new ArrayBuffer(8),0);
 
+    data.setFloat32(0,x,true);
+    data.setFloat32(4,y,true);
+
+    console.log(data.getFloat32(0));
+    console.log(data.getFloat32(4));
+
+    _videoPlayer && _videoPlayer.sendMsg(data.buffer);```
 
 &nbsp;
 &nbsp;
