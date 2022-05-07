@@ -10,7 +10,6 @@
 * [Sending Web browser Input to Unity](#sending-web-browser-input-to-unity)
 * [Applying RayCasting in Unity](#RayCasting)
 * [Web Server](#webserver)
-* [Browser Client](#browser-client)
 
 >## Overview
 
@@ -164,3 +163,16 @@ The [ray casting](https://en.wikipedia.org/wiki/Ray_casting) is a method in Grap
 &nbsp;
 
 >## Web Server:
+The web server follows the same implementation of the [Webserver](https://docs.unity3d.com/Packages/com.unity.renderstreaming@2.0/manual/en/webapp.html) provided with the unity render streaming package. The server consists of two parts. The first is the signaling server which is responsible for exchangin the signaling messages between the untiy client and the browser client.The second part of the web server is the browser client.
+
+#### Signaling Server:
+ The implmentation for the signaling server can be found in the file `WebApp/src`. It consists of two components.
+1. `WebSocket.ts` The Websocket that is responsible for creating a websocket connection between the server and the clients and forwarding the messages depending on the message type. 
+2. `Server.ts` Web server implementation that is depending on express.js server. It contains the routes for the signaling messages (/offer, /answer, /candidate).
+
+#### Browser Client:
+The impentation for the client can be found in the file `WebApp/public`. It contains the implementation for the two receiving modes either receiving video stream without annotaion or receiving the video and anotating that stream with ray casting. 
+
+The components representing the browser client: 
+1. `Peer.js` This is the impmentation for the [RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection) that handles the main functionalities creating the peer and setting the local and remote descriptions.
+2. `register-events.js` This is the component that registers to the mouse events and send the coordinates to the remote peer through the data channel.
