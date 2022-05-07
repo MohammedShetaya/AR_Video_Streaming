@@ -38,6 +38,9 @@ namespace Unity.RenderStreaming
 
         protected override MediaStreamTrack CreateTrack()
         {
+            streamingSize.x = Screen.width;
+            streamingSize.y = Screen.height; 
+
             RenderTexture rt;
 
             if (m_camera.targetTexture != null)
@@ -62,7 +65,6 @@ namespace Unity.RenderStreaming
             }
             else
             {
-                Debug.Log("created new render texture else"); 
                 RenderTextureFormat format = WebRTC.WebRTC.GetSupportedRenderTextureFormat(SystemInfo.graphicsDeviceType);
                 rt = new RenderTexture(streamingSize.x, streamingSize.y, depth, format)
                 {

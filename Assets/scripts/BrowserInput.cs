@@ -8,8 +8,16 @@ namespace Unity.ARVideoStreaming
 {
     public class BrowserInput : InputChannelReceiverBase
     {
+
+        private ARRayCasting rayCasting;
         private RTCDataChannel channel;
-        public override void SetChannel(string connectionId, RTCDataChannel channel)
+
+		private void Awake()
+		{
+            rayCasting = GameObject.FindGameObjectWithTag("CameraSessionOrigin").GetComponent<ARRayCasting>();
+		}
+
+		public override void SetChannel(string connectionId, RTCDataChannel channel)
         {
             channel.OnMessage += handleDataChannelMessages;
             this.channel = channel;
@@ -18,8 +26,18 @@ namespace Unity.ARVideoStreaming
 
         private void handleDataChannelMessages(byte[] bytes)
         {
+            string s = "";
+            foreach(var  b in bytes) {
+                s += b +" "; 
+            }
 
-            Debug.Log(System.Text.Encoding.Default.GetString(bytes));
+            Debug.Log(s); 
+            float x = BitConverter.ToSingle(bytes, 0);
+            float y = BitConverter.ToSingle(bytes, 4);
+            Debug.Log(x);
+            Debug.Log(y);
+
+            rayCasting.shootArrow( new Vector2(x,y));
         }
 
     }
