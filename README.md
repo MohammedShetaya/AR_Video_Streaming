@@ -174,5 +174,5 @@ The web server follows the same implementation of the [Webserver](https://docs.u
 The impentation for the client can be found in the file `WebApp/public`. It contains the implementation for the two receiving modes either receiving video stream without annotaion or receiving the video and anotating that stream with ray casting. 
 
 The components representing the browser client: 
-1. `Peer.js` This is the impmentation for the [RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection) that handles the main functionalities creating the peer and setting the local and remote descriptions.
+1. `Peer.js` This is the impmentation for the [RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection) that handles the main functionalities of creating the peer and setting the local and remote descriptions.
 2. `register-events.js` This is the component that registers to the mouse events and send the coordinates to the remote peer through the data channel.
