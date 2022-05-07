@@ -163,7 +163,7 @@ The [ray casting](https://en.wikipedia.org/wiki/Ray_casting) is a method in Grap
 &nbsp;
 
 >## Web Server:
-The web server follows the same implementation of the [Webserver](https://docs.unity3d.com/Packages/com.unity.renderstreaming@2.0/manual/en/webapp.html) provided with the unity render streaming package. The server consists of two parts. The first is the signaling server which is responsible for exchangin the signaling messages between the untiy client and the browser client.The second part of the web server is the browser client.
+The web server follows the same implementation of the [Webserver](https://docs.unity3d.com/Packages/com.unity.renderstreaming@2.0/manual/en/webapp.html) provided with the unity render streaming package. The server consists of two parts. The first is the signaling server which is responsible for exchanging the signaling messages between the untiy client and the browser client.The second part of the web server is the browser client.
 
 #### Signaling Server:
  The implmentation for the signaling server can be found in the file `WebApp/src`. It consists of two components.
