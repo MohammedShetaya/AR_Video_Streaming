@@ -148,22 +148,19 @@ Once the coordinates are calculated they will be sent to unity through an `RTCDa
 ```
 
 #### Receiving the coordinates in unity:
-First, the `BrowserInput` script must be added to the camera that holds the `RenderStreaming` and `BroadCast` scripts. `BrowserInput` is inherited from the render streaming class `InputChannelReceiverBase` and contains an implementation for the setChannel function that is called once an RTCDataChannel is created by the RenderStreaming Object. Now, it is possible to register to `onMessage` Action of the data channel. Once a message is received with the coordinated then it can be passed to the `RayCasting` object by calling `shootArrow` method.
+First, the `BrowserInput` script must be added to the camera that holds the `RenderStreaming` and `BroadCast` scripts. `BrowserInput` is inherited from the render streaming class `InputChannelReceiverBase` and contains an implementation for the setChannel function that is called once an RTCDataChannel is created by the RenderStreaming Object. Now, it is possible to register to `onMessage` Action of the data channel. Once a message is received with the coordinated then it can be passed to the `ARRayCasting` object by calling `shootArrow` method.
 
 
 &nbsp;
 &nbsp;
 
 >## RayCasting:
+The [ray casting](https://en.wikipedia.org/wiki/Ray_casting) is a method in Graphics to shoot an object along a 3D vector with the promise that it may hit another object. The Ray will hit the object with the least [z-index](https://en.wikipedia.org/wiki/Z-order) along its direction. In this project, the browser client should be able to point on a real world object on the stream it receives. For example the browser client can click on a book and this book should be pointed to with an arrow in the unity scene. In the Prefabs folder of this project, there is an arrow prefab that will be ray casted to point to a certain object. The implmentation of Ray Cating follows the following:
+1. Adding a [`ARRaycastManager`](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.0/manual/raycast-manager.html) to the AR Session origin object on the game scene.
+2. Adding `ARRayCasting` script to the AR Session origin object which contains the implementation for the shooting a ray. In the `Awake` method the script searches for the `ARRayCastManager` component which will be used in the `shootArrow` method that is being called once a message is received from the the data channel on the Browser Input script. 
+3. Providing the arrow prefab to the ARRayCasting script.
 
 &nbsp;
 &nbsp;
 
 >## Web Server:
-
-&nbsp;
-&nbsp;
-
-
->## Browser Client
-
