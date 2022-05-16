@@ -168,7 +168,7 @@ The [ray casting](https://en.wikipedia.org/wiki/Ray_casting) is a method in Grap
 &nbsp;
 &nbsp;
 
-#### Object Detection localy on the browser client:
+>## Object Detection localy on the browser client:
 
 &nbsp;
 &nbsp;
