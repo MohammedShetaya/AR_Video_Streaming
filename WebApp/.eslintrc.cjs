@@ -13,6 +13,8 @@ module.exports = {
   parserOptions: {
     sourceType: "module",
     project: "./tsconfig.lint.json",
+    "allowImportExportEverywhere": true
+
   },  
   plugins: ["@typescript-eslint", "jest"],
   rules: {

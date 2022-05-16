@@ -1,6 +1,7 @@
 import { VideoPlayer } from "./video-player.js";
 import { registerGamepadEvents, registerKeyboardEvents, registerMouseEvents, sendClickEvent } from "../../js/register-events.js";
 import { getServerConfig } from "../../js/config.js";
+import runModel from "./object-detection.js" ;
 
 setup();
 
@@ -54,45 +55,21 @@ function onClickPlayButton() {
   const playerDiv = document.getElementById('player');
 
   // add video player
+
   const elementVideo = document.createElement('video');
   elementVideo.id = 'Video';
   elementVideo.style.touchAction = 'none';
   playerDiv.appendChild(elementVideo);
 
-  /*/ add video thumbnail
-  const elementVideoThumb = document.createElement('video');
-  elementVideoThumb.id = 'VideoThumbnail';
-  elementVideoThumb.style.touchAction = 'none';
-  playerDiv.appendChild(elementVideoThumb);*/
 
-  setupVideoPlayer([elementVideo]).then(value => videoPlayer = value);
+  const canvas = document.createElement('canvas');
+  canvas.id = 'Canvas' ;
+  canvas.style.touchAction = 'none';
+  playerDiv.appendChild(canvas);
 
-  /*// add blue button
-  const elementBlueButton = document.createElement('button');
-  elementBlueButton.id = "blueButton";
-  elementBlueButton.innerHTML = "Light on";
-  playerDiv.appendChild(elementBlueButton);
-  elementBlueButton.addEventListener("click", function () {
-    sendClickEvent(videoPlayer, 1);
-  });
 
-  // add green button
-  const elementGreenButton = document.createElement('button');
-  elementGreenButton.id = "greenButton";
-  elementGreenButton.innerHTML = "Light off";
-  playerDiv.appendChild(elementGreenButton);
-  elementGreenButton.addEventListener("click", function () {
-    sendClickEvent(videoPlayer, 2);
-  });
+  setupVideoPlayer([elementVideo],canvas).then(value => videoPlayer = value);
 
-  // add orange button
-  const elementOrangeButton = document.createElement('button');
-  elementOrangeButton.id = "orangeButton";
-  elementOrangeButton.innerHTML = "Play audio";
-  playerDiv.appendChild(elementOrangeButton);
-  elementOrangeButton.addEventListener("click", function () {
-    sendClickEvent(videoPlayer, 3);
-  });*/
 
   // add fullscreen button
   const elementFullscreenButton = document.createElement('img');
@@ -130,15 +107,12 @@ function onClickPlayButton() {
   }
 }
 
-async function setupVideoPlayer(elements) {
+async function setupVideoPlayer(elements,canvas) {
   const videoPlayer = new VideoPlayer(elements);
   await videoPlayer.setupConnection(useWebSocket);
-
   videoPlayer.ondisconnect = onDisconnect;
-  //registerGamepadEvents(videoPlayer);
-  //registerKeyboardEvents(videoPlayer);
-  registerMouseEvents(videoPlayer, elements[0]);
-
+  registerMouseEvents(videoPlayer, canvas);
+  runModel(elements[0],canvas);
   return videoPlayer;
 }
 

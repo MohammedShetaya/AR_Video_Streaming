@@ -243,9 +243,9 @@ export function registerMouseEvents(videoPlayer, playerElement) {
     console.log(e);
     console.log(_videoPlayer);
 
-    const scale = _videoPlayer.videoScale;
+    const scale = _videoPlayer.videoScale;  
     const originX = _videoPlayer.videoOriginX;
-    const originY = _videoPlayer.videoOriginY
+    const originY = _videoPlayer.videoOriginY;
 
     const x = (e.clientX - originX) / scale;
     // According to Unity Coordinate system
@@ -255,10 +255,7 @@ export function registerMouseEvents(videoPlayer, playerElement) {
     console.log("x: " + x + ", y: " + y + ", scale: " + scale + ", originX: " + originX + ", originY: " + originY + " mouse button:" + e.buttons);
     Logger.log("x: " + x + ", y: " + y + ", scale: " + scale + ", originX: " + originX + ", originY: " + originY + " mouse button:" + e.buttons);
     let data = new DataView(new ArrayBuffer(8),0);
-    /*data.setUint8(0, InputEvent.Mouse);
-    data.setInt16(1, x, true);
-    data.setInt16(3, y, true);
-    data.setUint8(5, e.buttons);*/
+
     data.setFloat32(0,x,true);
     data.setFloat32(4,y,true);
 

@@ -31,14 +31,6 @@ export class VideoPlayer {
       _this.resizeVideo();
     }, true);
 
-    // secondly video
-    //this.localStream2 = new MediaStream();
-    //this.videoThumb = elements[1];
-    //this.videoThumb.playsInline = true;
-    /*this.videoThumb.addEventListener('loadedmetadata', function () {
-      _this.videoThumb.play();
-    }, true);*/
-
     this.videoTrackList = [];
     this.videoTrackIndex = 0;
     this.maxVideoTrackLength = 1;
@@ -159,7 +151,6 @@ export class VideoPlayer {
   resizeVideo() {
     const clientRect = this.video.getBoundingClientRect();
     const videoRatio = this.videoWidth / this.videoHeight;
-    console.log(this.videoWidth);
     const clientRatio = clientRect.width / clientRect.height;
 
     this._videoScale = videoRatio > clientRatio ? clientRect.width / this.videoWidth : clientRect.height / this.videoHeight;

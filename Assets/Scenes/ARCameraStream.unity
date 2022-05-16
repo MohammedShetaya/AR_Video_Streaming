@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 203987310}
   m_Layer: 0
   m_Name: AR Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   streamingSize: {x: 1280, y: 720}
-  depth: 0
+  depth: 24
   antiAliasing: 1
 --- !u!114 &203987304
 MonoBehaviour:
@@ -299,7 +299,7 @@ MonoBehaviour:
     urls:
     - stun:stun.l.google.com:19302
     username: 
-  interval: 5
+  interval: 1
   hardwareEncoderSupport: 1
   handlers:
   - {fileID: 203987304}
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30271907dc871eb4abe5b7ef1e7b828b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialGameObject: {fileID: 919132149155446097, guid: 8e2b047d58665fc449fb810b66338af8, type: 3}
+  initialGameObject: {fileID: 8927381932868769151, guid: 7bf35d56924f05143afd7cc5773bccb1, type: 3}
 --- !u!114 &1595055272
 MonoBehaviour:
   m_ObjectHideFlags: 0

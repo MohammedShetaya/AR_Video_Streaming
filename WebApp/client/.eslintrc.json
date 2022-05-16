@@ -9,7 +9,9 @@
   ],
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "allowImportExportEverywhere": true
+
   },
   "env": {
     "browser": true,
