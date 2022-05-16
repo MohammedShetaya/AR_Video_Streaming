@@ -9,6 +9,7 @@
 * [Streaming ARFoundation Camera to browser](#ar-camera-streaming)
 * [Sending Web browser Input to Unity](#sending-web-browser-input-to-unity)
 * [Applying RayCasting in Unity](#RayCasting)
+* [Object detection on the broser client](#object-detection-localy-on-the-browser-client)
 * [Web Server](#webserver)
 
 >## Overview
@@ -166,6 +167,12 @@ The [ray casting](https://en.wikipedia.org/wiki/Ray_casting) is a method in Grap
 
 &nbsp;
 &nbsp;
+
+#### Object Detection localy on the browser client:
+
+&nbsp;
+&nbsp;
+
 
 >## Web Server:
 The web server follows the same implementation of the [Webserver](https://docs.unity3d.com/Packages/com.unity.renderstreaming@2.0/manual/en/webapp.html) provided with the unity render streaming package. The server consists of two parts. The first is the signaling server which is responsible for exchanging the signaling messages between the untiy client and the browser client.The second part of the web server is the browser client.
