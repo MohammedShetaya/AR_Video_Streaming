@@ -22,7 +22,7 @@ This Project aims to apply remote guidance using Augmented Reality annotation on
 
 >## Installation:
 * The unity apllication can Built for Android [`API>=version 7.0`]
-* The web application is can be used on Desktop devices and is competible with most of the modern broswers that support the required WebRTC API. see documentation for the WebRTC. 
+* The web application is can be used on Desktop devices and is competible with most of the modern broswers that support the required WebRTC API. see documentation for  WebRTC below. 
 #### Building the Unity application:
 1. Clone this repository `https://github.com/MohammedShetaya/AR_Video_Streaming.git`
 2. Open project from disk using Unity Hub
