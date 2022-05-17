@@ -20,7 +20,9 @@ This Project aims to apply remote guidance using Augmented Reality annotation on
 &nbsp;
 &nbsp;
 
->## Installation
+>## Installation:
+The unity apllication can Built for Android [`API>=version 7.0`]
+The web application is can be used on Desktop devices and is competible with most of the modern broswers that support the required WebRTC API. see documentation for the WebRTC. 
 #### Building the Unity application:
 1. Clone this repository `https://github.com/MohammedShetaya/AR_Video_Streaming.git`
 2. Open project from disk using Unity Hub
@@ -55,7 +57,7 @@ The project is based on:
 - [UnityRenderStreaming](https://docs.unity3d.com/Packages/com.unity.renderstreaming@3.1/manual/index.html) package (version `3.1.0-exp.3`).
 
 
-### [WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html):
+### [Unity.WebRTC](https://docs.unity3d.com/Packages/com.unity.webrtc@2.4/manual/index.html) && [WebRTC browser API](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API):
 This package is an API for WebRTC protocol, but in unity with the same browser implementation which gives a great benifit in using this protocol in unity AR and VR applications. This package is compitble with the browser API so it can be used to allow real-time, peer-to-peer, media exchange between unity-unity application or unity-browser application. A connection is established through a discovery and negotiation process called signaling. The signaling between two peers is not supported by WebRTC protocol because every peer is connecting to the Internet behind a [NAT](https://en.wikipedia.org/wiki/Network_address_translation) so each peer has no information about his public IP address therefore each peer cannot give his IP to the other peer. The solution for this is to use a signaling server. 
 
 #### Signaling Server: 
