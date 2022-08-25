@@ -12,6 +12,8 @@
 * [Object detection on the broser client](#object-detection-localy-on-the-browser-client)
 * [Web Server](#webserver)
 
+![Annotations on live video stream](https://github.com/MohammedShetaya/AR_Video_Streaming/blob/main/annotation.png)
+
 >## Overview
 
 This Project aims to apply remote guidance using Augmented Reality annotation on a Video stream between the web browser and an android phone. The android application streams an [ARFoundation](https://docs.unity3d.com/Packages/com.unity.xr.arfoundation@4.1/manual/index.html) scene to the browser which is responsible for plane detection, then the browser can annotate that stream with AR objects e.g. Arrows. 
