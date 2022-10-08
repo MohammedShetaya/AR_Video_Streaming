@@ -9,7 +9,7 @@
 * [Streaming ARFoundation Camera to browser](#ar-camera-streaming)
 * [Sending Web browser Input to Unity](#sending-web-browser-input-to-unity)
 * [Applying RayCasting in Unity](#RayCasting)
-* [Object detection on the broser client](#object-detection-localy-on-the-browser-client)
+* [Object detection on the browser client](#object-detection-localy-on-the-browser-client)
 * [Web Server](#webserver)
 
 ![Annotations on live video stream](https://github.com/MohammedShetaya/AR_Video_Streaming/blob/main/annotation.png)
